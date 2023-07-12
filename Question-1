@@ -1,0 +1,44 @@
+
+const token = jsonwebtoken.sign({
+  data: 'some data',
+}, 'secret');
+const decoded = jsonwebtoken.decode(token, 'secret');
+const express = require('express');
+const bodyParser = require('body-parser');
+const jsonwebtoken = require('jsonwebtoken');
+
+const app = express();
+app.use(bodyParser.json());
+
+app.get('/trains', (req, res) => {
+  const trains = [
+    {
+      "train_number": "12345",
+      "source": "Delhi",
+      "destination": "Mumbai",
+      "departure_time": "2023-07-12T00:00:00Z",
+      "arrival_time": "2023-07-12T12:00:00Z",
+      "sleeper_seats_available": 100,
+      "sleeper_seats_price": 500,
+      "ac_seats_available": 50,
+      "ac_seats_price": 1000
+    },
+    {
+ "train_number": "67890",
+      "source": "Bangalore",
+      "destination": "Chennai",
+      "departure_time": "2023-07-12T01:00:00Z",
+      "arrival_time": "2023-07-12T13:00:00Z",
+      "sleeper_seats_available": 200,
+      "sleeper_seats_price": 300,
+      "ac_seats_available": 100,
+      "ac_seats_price": 600
+    }
+  ];
+
+  res.json(trains);
+});
+
+app.listen(3000, () => {
+  console.log('API is running on port 3000');
+});
